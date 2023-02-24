@@ -16,7 +16,7 @@ source('EA078_warehouse_polygons.R')
 
 #worksheet with details of projects
 March215_60_sheet <- read_sheet('https://docs.google.com/spreadsheets/d/1u7JJYoxl5lE-oXJHEt5kqICmLug6SDh5sYSrSNud7Cs/edit#gid=0',
-                                sheet = 'March215_60') %>% 
+                       sheet = 'March215_60') %>% 
   janitor::clean_names()
 
 #a couple of older approved warehouses in Moreno Valley from public records request
@@ -96,36 +96,19 @@ warehouses <- st_read(WH.url) %>%
   st_transform("+proj=longlat +ellps=WGS84 +datum=WGS84") %>% 
   filter(county %in% c('Riverside', 'San Bernardino'))
 
-leaflet() %>% 
-  addTiles() %>% 
-  addProviderTiles(providers$CartoDB.Positron, group = 'Basemap') %>% 
-  addProviderTiles(provider = providers$Esri.WorldImagery, 
-                   group = 'Imagery') %>% 
-  addLayersControl(baseGroups = c('Basemap', 'Imagery'),
-                   
-                   options = layersControlOptions(collapsed = FALSE)) %>%
-  setView(lng = -117.24, lat = 34, zoom = 10) %>% 
-  addPolygons(data = planned_tidy_narrow_all,
-              color = 'purple',
-              weight = 1) %>% 
-  addPolygons(data = warehouses,
-              color= 'red',
-              fillOpacity = 0.2,
-              weight = 1)
-
-
 ## March JPA cumulative Impact list 1
 leaflet() %>% 
   addTiles() %>% 
-  addProviderTiles(providers$CartoDB.Positron, group = 'Basemap') %>% 
+  addProviderTiles(providers$CartoDB.PositronNoLabels, group = 'Basemap') %>% 
   addProviderTiles(provider = providers$Esri.WorldImagery, 
                    group = 'Imagery') %>% 
   addLayersControl(baseGroups = c('Basemap', 'Imagery'),
                    options = layersControlOptions(collapsed = FALSE)) %>%
-  setView(lng = -117.22, lat = 33.875, zoom = 12) %>% 
+  setView(lng = -117.3, lat = 34, zoom = 10)%>% 
   addPolygons(data = planned_tidy_narrow_all,
               color = 'purple',
-              weight = 1) %>% 
+              weight = 1,
+              label = ~htmlEscape(name)) %>% 
   addPolygons(data = warehouses,
               color= 'red',
               fillOpacity = 0.2,
