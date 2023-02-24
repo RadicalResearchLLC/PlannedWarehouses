@@ -6,6 +6,7 @@ library(tidyverse)
 library(leaflet)
 library(htmltools)
 
+#Chanah Haigh # Southern California Logistics Airport Lot 44 Distribution Center
 airport_lot_44<- rbind(
   c(-117.397664, 34.591895),
   c(-117.395513, 34.591843),
@@ -162,7 +163,8 @@ SOLC1 <- rbind(
     geom = st_sfc(st_polygon(list(MajesticFreeway1))), 
     crs = 4326
   )
-
+  
+  #Austin Dowd #Mountain View Industrial
 MountainViewIndustrial <- rbind(
     c(-117.243449,34.070819) ,
     c(-117.243476,34.067186) ,
@@ -174,7 +176,6 @@ MountainViewIndustrial <- rbind(
     name = 'Mountain View Industrial', 
     geom = st_sfc(st_polygon(list(MountainViewIndustrial))), 
     crs = 4326)
-  
   
   #Austin Dowd #Project Viento 
   ProjectViento <- rbind(
@@ -190,11 +191,6 @@ MountainViewIndustrial <- rbind(
     name = 'Project Viento', 
     geom = st_sfc(st_polygon(list(ProjectViento))), 
     crs = 4326)
-  
-  
-  
-  
-  
   
   #Chanah Haigh, 1-15 logistics center, Fontana
   I15_Logistics<- rbind(
@@ -214,7 +210,7 @@ I15_Logistics <- st_sf(
       name = 'I-15 Logistics Center', 
       geom = st_sfc(st_polygon(list(I15_Logistics))), 
       crs = 4326)
-
+#Cece Ontario Ranch  
 OntarioRanch1 <- rbind(
   c(-117.647611,33.990414) ,
   c(-117.645448,33.990391) ,
@@ -241,21 +237,105 @@ SierraSummit <- st_sf(
   geom = st_sfc(st_polygon(list(SierraSummit1))), 
   crs = 4326)
 
-
-
+#Medha Gelli #Multi Tenant Industrial Warehouse Redlands
+M_T_Ind_Redlands <- rbind(
+  c(-117.22175, 34.05845),
+  c(-117.21965, 34.05845),
+  c(-117.21965, 34.0567),
+  c(-117.22175, 34.0567),
+  c(-117.22175, 34.05845)
+)
+Industrial_Redlands <- st_sf(
+  name = 'Multi_Tenant_Industrial_Warehouse_Redlands', 
+  geom = st_sfc(st_polygon(list(M_T_Ind_Redlands))), 
+  crs = 4326
+)
+#Seiji Akera #Hesperia Commerce Center II
+HesperiaCC2 <- rbind(
+  c(-117.399731, 34.432906), 
+  c(-117.403902, 34.432906), 
+  c(-117.403902, 34.433961), 
+  c(-117.411273, 34.433961), 
+  c(-117.416482, 34.426899), 
+  c(-117.403902, 34.426899), 
+  c(-117.403902, 34.431690), 
+  c(-117.399731, 34.431690), 
+  c(-117.399731, 34.432906)
+)
+HesperiaCC2SP <- st_sf(
+  name = 'Hesperia Commerce Center II', 
+  geom = st_sfc(st_polygon(list(HesperiaCC2))), # Turns the coordinates into a list, creates a polygon out of it, then checks to make sure it's a valid shape
+  crs = 4326
+)
+#Kana
+DaraIndustrial1  <- rbind(
+  c(-117.399733,  34.416016),
+  c(-117.404690, 34.416016),
+  c(-117.404658, 34.417848),
+  c(-117.399808, 34.417830),
+  c(-117.399733,  34.416016))
+DaraIndustrialProject <- st_sf(
+  name = 'DaraIndustrialProject', 
+  geom = st_sfc(st_polygon(list(DaraIndustrial1))), 
+                crs = 4326 
+  )
+  
+CADOMenifee1 <- rbind(
+  c(-117.215164, 33.742054),
+  c(-117.215185, 33.742018),
+  c(-117.215078,33.737834),
+  c(-117.219133,33.737843),
+  c(-117.215164, 33.742054)
+)
+  CADOManifeeProject <- st_sf(
+    name = 'CADOMenifee1',
+    geom = st_sfc(st_polygon(list(CADOMenifee1))),
+                  crs = 4326
+    )
+  
+  # Nile Phillips, I-15 Industrial Park
+  
+  I15_industrial_park <- rbind(
+    c(-117.399052, 34.415999),
+    c(-117.399035, 34.419499),
+    c(-117.394950, 34.419354),
+    c(-117.394843, 34.419407),
+    c(-117.390293, 34.419502),
+    c(-117.390282, 34.423642),
+    c(-117.388787, 34.423721),
+    c(-117.387983, 34.423549),
+    c(-117.386279, 34.423456),
+    c(-117.386118, 34.420154),
+    c(-117.389354, 34.415900),
+    c(-117.390174, 34.415927),
+    c(-117.390286, 34.419215),
+    c(-117.394787, 34.419268),
+    c(-117.394884, 34.415953),
+    c(-117.399052, 34.415999)
+  )
+  
+  I15_industrial_park_polygon <- st_sf(
+    name = 'I-15 Industrial Park Area', 
+    geom = st_sfc(st_polygon(list(I15_industrial_park))),
+    crs = 4326
+  )
+  
+    
 ##Update this line of code with the name of your warehouse polygon 
 
 plannedWarehouses <- rbind(Airport44, AirportGatewaySP, LegacyPhaseII,
-                           AltitudeBusinessCentre,  SOLC,
-                           HesperiaCommerce, MerrilCommerce,
+                           AltitudeBusinessCentre,  SOLC, DaraIndustrialProject,
+                           HesperiaCommerce, MerrilCommerce, HesperiaCC2SP,
                            MajesticFreeway, ProjectVientoSP,
                            MountainViewIndustrialSP, OntarioRanch,
-                           SierraSummit)
+                           SierraSummit, Industrial_Redlands,CADOManifeeProject,
+                           I15_industrial_park_polygon)
 
 ##Map
 
 leaflet() %>% 
   addTiles() %>%  
+  addProviderTiles(provider = providers$CartoDB.PositronNoLabels) %>% 
   addPolygons(data = plannedWarehouses,
               color = 'darkred',
               fillOpacity = 0.6,
