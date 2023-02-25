@@ -319,6 +319,31 @@ CADOMenifee1 <- rbind(
     geom = st_sfc(st_polygon(list(I15_industrial_park))),
     crs = 4326
   )
+
+#Medha Gelli #2022 Legacy Highlands Specific Plan Project
+L_H_S_P <- rbind(
+  c(-117.016622, 33.933340),
+  c(-117.0096, 33.933340),
+  c(-117.0096, 33.922215),
+  c(-117.0035, 33.922215), 
+  c(-117.0035, 33.918507),
+  c(-116.9991, 33.918507),
+  c(-116.9991, 33.899434),
+  c(-116.999445, 33.894),
+  c(-117.004030, 33.890865),
+  c(-117.004030, 33.894),
+  c(-117.010184, 33.894),
+  c(-117.012825, 33.894),
+  c(-117.012825, 33.896723),
+  c(-117.017464, 33.896723),
+  c(-117.016622, 33.933340)
+)
+Legacy_Highlands_SP <- st_sf(
+  name = 'Legacy_Highlands_Specific_Plan', 
+  geom = st_sfc(st_polygon(list(L_H_S_P))), 
+  crs = 4326
+)
+
   
     
 ##Update this line of code with the name of your warehouse polygon 
@@ -329,7 +354,7 @@ plannedWarehouses <- rbind(Airport44, AirportGatewaySP, LegacyPhaseII,
                            MajesticFreeway, ProjectVientoSP,
                            MountainViewIndustrialSP, OntarioRanch,
                            SierraSummit, Industrial_Redlands,CADOManifeeProject,
-                           I15_industrial_park_polygon)
+                           I15_industrial_park_polygon, Legacy_Highlands_SP)
 
 ##Map
 
