@@ -193,23 +193,24 @@ MountainViewIndustrial <- rbind(
     crs = 4326)
   
   #Chanah Haigh, 1-15 logistics center, Fontana
-  I15_Logistics<- rbind(
-    c(-117.449386, 34.174042),
-    c(-117.449396, 34.177887),
-    c(-117.444219, 34.180457),
-    c(-117.443179, 34.181885),
-    c(-117.442701, 34.181696),
-    c(-117.441911, 34.182780),
-    c(-117.440517, 34.183313),
-    c(-117.442701, 34.179545),
-    c(-117.441183, 34.178616),
-    c(-117.443179, 34.181885),
-    c(-117.449386, 34.174042))
+  #Mike - already in Fontana MCN projects
+#  I15_Logistics<- rbind(
+#    c(-117.449386, 34.174042),
+#    c(-117.449396, 34.177887),
+#    c(-117.444219, 34.180457),
+#    c(-117.443179, 34.181885),
+#    c(-117.442701, 34.181696),
+#    c(-117.441911, 34.182780),
+#    c(-117.440517, 34.183313),
+#    c(-117.442701, 34.179545),
+#    c(-117.441183, 34.178616),
+#    c(-117.443179, 34.181885),
+#    c(-117.449386, 34.174042))
   
-I15_Logistics <- st_sf(
-      name = 'I-15 Logistics Center', 
-      geom = st_sfc(st_polygon(list(I15_Logistics))), 
-      crs = 4326)
+#I15_Logistics <- st_sf(
+#      name = 'I-15 Logistics Center', 
+#      geom = st_sfc(st_polygon(list(I15_Logistics))), 
+#      crs = 4326)
 #Cece Ontario Ranch  
 OntarioRanch1 <- rbind(
   c(-117.647611,33.990414) ,
@@ -344,17 +345,209 @@ Legacy_Highlands_SP <- st_sf(
   crs = 4326
 )
 
-  
-    
+#Henry S #Chino Majestic Heritage
+
+ChinoMajesticHeritage <- rbind(
+  c(-117.66691,33.96004),
+  c(-117.66687,33.95390),
+  c(-117.66148,33.95395),
+  c(-117.66149839516504,33.95756713390191),
+  c(-117.65915950909319,33.957576032949845),
+  c(-117.65905222074082,33.95880409264722),
+  c(-117.65939554346696,33.960058830976294),
+  c(-117.66691,33.96004)
+)
+
+ChinoMajesticHeritageSP <- st_sf(
+  name = 'Chino Majestic Heritage', 
+  geom = st_sfc(st_polygon(list(ChinoMajesticHeritage))), 
+  crs = 4326
+)
+#Cece Sunset Crossroads
+SunsetCrossroads1 <- rbind(
+  c(-116.928900, 33.918206),
+  c(-116.929210, 33.925239),
+  c(-116.920059, 33.925188),
+  c(-116.911981, 33.923551),
+  c(-116.911934, 33.918426),
+  c(-116.928900, 33.918206)
+)
+
+SunsetCrossroads <- st_sf(
+  name = 'SunsetCrossroads', 
+  geom = st_sfc(st_polygon(list(SunsetCrossroads1))), 
+  crs = 4326)
+
+#Cece Olive Avenue
+OliveAvenue1 <- rbind(
+  c(-117.393255, 34.121490),
+  c(-117.393286, 34.122429),
+  c(-117.392281, 34.122457),
+  c(-117.392219, 34.124988),
+  c(-117.391414, 34.124925),
+  c(-117.388074, 34.123529),
+  c(-117.388007, 34.121494),
+  c(-117.393255, 34.121490)
+)
+
+OliveAvenue <- st_sf(
+  name = 'OliveAvenue', 
+  geom = st_sfc(st_polygon(list(OliveAvenue1))), 
+  crs = 4326)
+#Cece Orchard Logistics
+OrchardLogistics1 <- rbind(
+  c(-116.998831, 33.933221),
+  c(-116.994936, 33.933020),
+  c(-116.994911, 33.929996),
+  c(-116.998739, 33.930155),
+  c(-116.998831, 33.933221)
+)
+
+OrchardLogistics <- st_sf(
+  name = 'OrchardLogistics', 
+  geom = st_sfc(st_polygon(list(OrchardLogistics1))), 
+  crs = 4326)
+
+#Cece Potrero Logistics
+PotreroLogistics1 <- rbind(
+  c(-117.016407, 33.928711),
+  c(-117.016513, 33.933479),
+  c(-117.008081, 33.933368),
+  c(-117.007948, 33.927519),
+  c(-117.011153, 33.927608),
+  c(-117.013720, 33.928502),
+  c(-117.016380, 33.928789),
+  c(-117.016407, 33.928711)
+)
+
+PotreroLogistics <- st_sf(
+  name = 'PotreroLogistics', 
+  geom = st_sfc(st_polygon(list(PotreroLogistics1))), 
+  crs = 4326)
+
+#Cece Apple Valley
+
+AppleValley1 <- rbind(
+  c(-117.257541, 34.591280),
+  c(-117.251097, 34.601122),
+  c(-117.241881, 34.600996),
+  c(-117.241881, 34.594584),
+  c(-117.257541, 34.591280)
+)
+
+AppleValley <- st_sf(
+  name = 'AppleValley', 
+  geom = st_sfc(st_polygon(list(AppleValley1))), 
+  crs = 4326)
+
+#Chanah Haigh, Durst Drive Warehouse
+Durst<- rbind(
+  c( -117.396297, 34.096014),
+  c( -117.394236, 34.096060),
+  c( -117.394240, 34.094391),
+  c( -117.396283, 34.094372),
+  c( -117.396297, 34.096014))
+
+Durst<- st_sf(
+  name= 'Durst Drive Warehouse', 
+  geom=st_sfc(st_polygon(list(Durst))),
+  crs=4326)
+
+#Paige Baird #Ontario Ranch Specific Plan
+
+OntarioRanchSub<- rbind(
+  c(-117.645242, 33.990213),
+  c(-117.641099, 33.990237),
+  c(-117.641124, 33.983297),
+  c(-117.645230, 33.983205),
+  c(-117.645242, 33.990213)
+)
+OntarioRanchSub <- st_sf(
+  name = 'Ontario Ranch Specific Plan', 
+  geom = st_sfc(st_polygon(list(OntarioRanchSub))), 
+  crs = 4326
+)
+
+#Max Boyle Ontario Ranch subsequent
+OntarioRanch2 <- rbind(
+  c(-117.650557, 33.98308),
+  c(-117.645309, 33.983184),
+  c(-117.645393, 33.990257),
+  c(-117.650575, 33.990197),
+  c(-117.650557, 33.98308)
+)
+OntarioRanch2 <- st_sf(
+  name = 'Ontario Ranch', 
+  geom = st_sfc(st_polygon(list(OntarioRanch2))), 
+  crs = 4326
+)
+
+#Max Boyle 9th and Vineyard Development
+NinthandVineyard <- rbind(
+  c(-117.619778, 34.092563),
+  c(-117.619774, 34.094813),
+  c(-117.617814, 34.094820),
+  c(-117.617807, 34.094756),
+  c(-117.617444, 34.094732),
+  c(-117.617416, 34.093878),
+  c(-117.615461, 34.093884),
+  c(-117.615482, 34.095657),
+  c(-117.612545, 34.095668),
+  c(-117.611237, 34.094025),
+  c(-117.611265, 34.092636),
+  c(-117.619778, 34.092563)
+)
+NinthandVineyard <- st_sf(
+  name = 'Ninth and Vineyard', 
+  geom = st_sfc(st_polygon(list(NinthandVineyard))), 
+  crs = 4326
+)
+
+#Anders Blaine #Pepper Ave Industrial  Development Project
+PEPPERAVE <- rbind(
+  c(-117.352935, 34.132245),
+  c(-117.348682, 34.132309),
+  c(-117.348643, 34.130376),
+  c(-117.351070, 34.130290),
+  c(-117.351057, 34.129728),
+  c(-117.352870, 34.129728),
+  c(-117.352935, 34.132245)
+)
+PEPPERAVE <- st_sf(
+  name = 'Pepper Ave Industrial Development Project', 
+  geom = st_sfc(st_polygon(list(PEPPERAVE))), 
+  crs = 4326
+)
+
+#Nathan Lu 
+SoOntLogisticsCenterP_1 <- rbind(
+  c(-117.63677654605547, 33.99034338154487),
+  c(-117.62812910496746, 33.99037896401365),
+  c(-117.62808618962706, 33.984881295912764),
+  c(-117.6323777236658, 33.984916880668564),
+  c(-117.6323777236658, 33.983191002850994),
+  c(-117.63660488469391, 33.98326217376304),
+  c(-117.63677654605547, 33.99034338154487)
+)
+
+SoOntLogisticsCenterP_1 <- st_sf(
+  name = 'South Ontario Logistics Center Specific Plan Phase I', 
+  geom = st_sfc(st_polygon(list(SoOntLogisticsCenterP_1))), 
+  crs = 4326
+)
+
+
 ##Update this line of code with the name of your warehouse polygon 
 
-plannedWarehouses <- rbind(Airport44, AirportGatewaySP, LegacyPhaseII,
-                           AltitudeBusinessCentre,  SOLC, DaraIndustrialProject,
-                           HesperiaCommerce, MerrilCommerce, HesperiaCC2SP,
-                           MajesticFreeway, ProjectVientoSP,
-                           MountainViewIndustrialSP, OntarioRanch,
-                           SierraSummit, Industrial_Redlands,CADOManifeeProject,
-                           I15_industrial_park_polygon, Legacy_Highlands_SP)
+plannedWarehouses <- rbind(Airport44, AirportGatewaySP, AppleValley,
+                           AltitudeBusinessCentre, CADOManifeeProject, ChinoMajesticHeritageSP,
+                           DaraIndustrialProject, Durst,
+                           HesperiaCommerce, HesperiaCC2SP, Industrial_Redlands,
+                           I15_industrial_park_polygon, LegacyPhaseII,
+                           MerrilCommerce, MountainViewIndustrialSP, NinthandVineyard,
+                           OntarioRanch, OntarioRanch2, OliveAvenue, OrchardLogistics, 
+                           PEPPERAVE, PotreroLogistics, ProjectVientoSP, SierraSummit, SOLC,
+                           SoOntLogisticsCenterP_1, SunsetCrossroads)
 
 ##Map
 
@@ -367,3 +560,16 @@ leaflet() %>%
               weight = 1,
               label = ~htmlEscape(name)) #%>% 
   #setView(lng = -117.396398, lat = 34.590419, zoom = 14)
+
+rm(ls = airport_lot_44, Airport44, AirportGateway1,AirportGatewaySP, AltitudeBusinessCentre)
+rm(ls = AppleValley, AppleValley1, CADOManifeeProject, CADOMenifee1, ChinoMajesticHeritage, ChinoMajesticHeritageSP)
+rm(ls = DaraIndustrial1, DaraIndustrialProject, Durst, HesperiaCC2, HesperiaCC2SP, HesperiaCommerce, HesperiaCommerce1)
+rm(ls = I15_industrial_park, I15_industrial_park_polygon, Industrial_Redlands, L_H_S_P)
+rm(ls = LegacyHighlands, Legacy_Highlands_SP, LegacyPhaseII, M_T_Ind_Redlands, MajesticFreeway, MajesticFreeway1)
+rm(ls = MerrilCommerce, MerrilCommerce1, MountainViewIndustrial, MountainViewIndustrialSP, OliveAvenue1, OliveAvenue)
+rm(ls = OntarioRanch, OntarioRanch1, OntarioRanch2, OntarioRanchSub, OrchardLogistics)
+rm(ls = NinthandVineyard, OrchardLogistics1, PEPPERAVE, PotreroLogistics, PotreroLogistics1)
+rm(ls = ProjectViento, ProjectVientoSP, SierraSummit, SierraSummit1, SOLC, SOLC1, SoOntLogisticsCenterP_1)
+rm(ls = SunsetCrossroads, SunsetCrossroads1)
+
+

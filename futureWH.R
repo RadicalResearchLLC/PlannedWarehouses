@@ -104,7 +104,7 @@ leaflet() %>%
                    group = 'Imagery') %>% 
   addLayersControl(baseGroups = c('Basemap', 'Imagery'),
                    options = layersControlOptions(collapsed = FALSE)) %>%
-  setView(lng = -117.3, lat = 34, zoom = 10)%>% 
+  setView(lng = -117.3, lat = 34, zoom = 9)%>% 
   addPolygons(data = planned_tidy_narrow_all,
               color = 'purple',
               weight = 1,
