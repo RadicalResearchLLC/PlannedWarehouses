@@ -77,14 +77,37 @@ Speedway <- st_sf(name = 'Speedway Commerce Center', geom = st_sfc(st_polygon(li
 
 rm(ls = speed, Fontana3yrPlanned, missingMoVal)
 
-## SBD list to date
 
+
+
+
+#Import EA018 warehouse list  
+EA018sheet <- read_sheet('https://docs.google.com/spreadsheets/d/1Ev8455_HqftMlcxs9o7hbe3eip9SgOMomG5KHI9XlBs/edit#gid=720173336',
+                                sheet = 'Warehouse Coordinates EA 108') %>% 
+  select(1:3) %>% 
+  janitor::clean_names() %>% 
+  rename(name = name_1, lng = longitude_2, lat = latitude_3) %>% 
+  filter(!is.na(lng))
+
+EA018_whNames <- EA018sheet %>%
+  select(name) %>% 
+  distinct() 
+
+tempPolygon <- EA018sheet %>%
+  st_as_sf(coords = c('lng', 'lat'), crs = 4326) %>%
+  group_by(name) %>%
+  summarise(geom = st_combine(geometry)) %>%
+  st_cast("POLYGON")
+  
+
+## SBD list to date
 SBD_wh_narrowest <- Fontana_industrial %>% 
   select(name, geometry) %>% 
   rename(geom = geometry) %>% 
   bind_rows(bloom_proj) %>% 
   bind_rows(Speedway) %>% 
-  bind_rows(plannedWarehouses)
+  bind_rows(plannedWarehouses) %>% 
+  bind_rows(tempPolygon)
 
 planned_tidy_narrow_all <- planned_tidy %>% 
   select(name, geom) %>% 
