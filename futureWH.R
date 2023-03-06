@@ -65,6 +65,15 @@ Fontana_industrial <- Fontana3yrPlanned %>%
   select(name, number, apn, status, Shape__Area, geometry) %>% 
   rename(footprint = Shape__Area)
 
+#remove excess columns
+Fontana_industrial2 <- Fontana_industrial %>% 
+  select(name, number, geometry, status, footprint, apn) %>%
+  mutate(row = row_number())
+#remove duplicates
+u <- st_equals(Fontana_industrial2, retain_unique = TRUE)
+Fontana_industrial <- Fontana_industrial2[-unlist(u),] %>% 
+  select(-row)
+
 speed <- rbind(c(-117.51347, 34.08497),
                c(-117.51289, 34.08684),
                c(-117.51, 34.088),
@@ -76,10 +85,6 @@ speed <- rbind(c(-117.51347, 34.08497),
 Speedway <- st_sf(name = 'Speedway Commerce Center', geom = st_sfc(st_polygon(list(speed))), crs = 4326)
 
 rm(ls = speed, Fontana3yrPlanned, missingMoVal)
-
-
-
-
 
 #Import EA018 warehouse list  
 EA018sheet <- read_sheet('https://docs.google.com/spreadsheets/d/1Ev8455_HqftMlcxs9o7hbe3eip9SgOMomG5KHI9XlBs/edit#gid=720173336',
@@ -137,4 +142,5 @@ leaflet() %>%
               fillOpacity = 0.2,
               weight = 1)
 
+unlink('plannedWarehouses.geojson')
 sf::st_write(planned_tidy_narrow_all, 'plannedWarehouses.geojson')
