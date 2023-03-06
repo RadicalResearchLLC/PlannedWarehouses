@@ -46,6 +46,10 @@ planned_tidy <- planned215_60_full %>%
 ## MCN_projects acquired from City of Fontana Open Data page January 2023
 ## https://data-fontanaca.opendata.arcgis.com/datasets/mcn-projects-public/explore?location=34.108794%2C-117.462315%2C12.92
 
+notWHParcels <- c('zoning code amendment schools in fbc and truck rep',
+                  'east coast truck and auto sales',
+                  'up zoning for the i-15 logistics warehouse')
+
 Fontana3yrPlanned <- sf::st_read(dsn = 'C:/Dev/Fontana_analysis/MCN_Projects_Public.geojson') %>% 
   rename(name = Fontana_COF_DSO_PRJS_PROJ_NAME,
          number = Fontana_COF_DSO_PRJS_PROJECT_NO,
@@ -57,7 +61,8 @@ Fontana3yrPlanned <- sf::st_read(dsn = 'C:/Dev/Fontana_analysis/MCN_Projects_Pub
          log = str_detect(name, 'logistics'),
          com = str_detect(name, 'commerce'),
          truck = str_detect(name, 'truck'),
-         bus = str_detect(name, 'business center')) 
+         bus = str_detect(name, 'business center')) %>% 
+  filter(name %ni% notWHParcels)
 
 Fontana_industrial <- Fontana3yrPlanned %>% 
   filter(wh == TRUE | ind == TRUE | log == TRUE | com == TRUE | truck == TRUE | bus == TRUE) %>% 
@@ -144,3 +149,4 @@ leaflet() %>%
 
 unlink('plannedWarehouses.geojson')
 sf::st_write(planned_tidy_narrow_all, 'plannedWarehouses.geojson')
+
