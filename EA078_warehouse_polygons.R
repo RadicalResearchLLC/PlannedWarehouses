@@ -560,6 +560,31 @@ landing_polygon <- st_sf(
   crs = 4326  # our coordinate reference system
 )
 
+#Annie Voss #Renaissance Ranch Commerce Center
+
+RenaissanceRanchCCSP <- rbind(
+  c(-117.425462, 33.736989),
+  c(-117.421235, 33.734446),
+  c(-117.419722, 33.733706),
+  c(-117.417298, 33.733162),
+  c(-117.416761, 33.732180),
+  c(-117.415978, 33.732689),
+  c(-117.416139, 33.727719),
+  c(-117.424621, 33.727786),
+  c(-117.424718, 33.734888),
+  c(-117.428087, 33.734995),
+  c(-117.428097, 33.735914),
+  c(-117.429041, 33.736004),
+  c(-117.429041, 33.736762),
+  c(-117.426529, 33.736863),
+  c(-117.426620, 33.737247),
+  c(-117.425462, 33.736989)
+)
+
+RenaissanceRanchComerceCenter <- st_sf(
+  name = 'Renaissance Ranch Commerce Center', 
+  geom = st_sfc(st_polygon(list(RenaissanceRanchCCSP))), 
+  crs = 4326)
 
 ##Update this line of code with the name of your warehouse polygon 
 
@@ -567,11 +592,11 @@ plannedWarehouses <- rbind(Airport44, AirportGatewaySP, AppleValley,
                            AltitudeBusinessCentre, CADOManifeeProject, ChinoMajesticHeritageSP,
                            DaraIndustrialProject, Durst,
                            HesperiaCommerce, HesperiaCC2SP, Industrial_Redlands,
-                           I15_industrial_park_polygon, Legacy_Highlands_SP,
+                           I15_industrial_park_polygon, landing_polygon, Legacy_Highlands_SP,
                            MerrilCommerce, MountainViewIndustrialSP, NinthandVineyard,
                            OntarioRanch, OntarioRanch2, OliveAvenue, OrchardLogistics, 
-                           PEPPERAVE, PotreroLogistics, ProjectVientoSP, SierraSummit, SOLC,
-                           SunsetCrossroads, landing_polygon)
+                           PEPPERAVE, PotreroLogistics, ProjectVientoSP, RenaissanceRanchComerceCenter, 
+                           SierraSummit, SOLC, SunsetCrossroads )
 
 ##Map
 
