@@ -89,6 +89,7 @@ SOLC1 <- rbind(
     crs = 4326
   )  
   
+
   # Ivy Jones # Merril Commerce Center Specific Plan
   MerrilCommerce1 <- rbind(
     c(-117.62792680583084, 33.98314198689001),
@@ -323,9 +324,10 @@ CADOMenifee1 <- rbind(
 
 #Medha Gelli #2022 Legacy Highlands Specific Plan Project
 L_H_S_P <- rbind(
-  c(-117.016622, 33.933340),
-  c(-117.0096, 33.933340),
-  c(-117.0096, 33.922215),
+  c(-117.016622, 33.928488),
+  c(-117.013466, 33.92812),
+  c(-117.01107, 33.92725),
+  c(-117.00794, 33.92725),
   c(-117.0035, 33.922215), 
   c(-117.0035, 33.918507),
   c(-116.9991, 33.918507),
@@ -337,10 +339,10 @@ L_H_S_P <- rbind(
   c(-117.012825, 33.894),
   c(-117.012825, 33.896723),
   c(-117.017464, 33.896723),
-  c(-117.016622, 33.933340)
+  c(-117.016622, 33.928488)
 )
 Legacy_Highlands_SP <- st_sf(
-  name = 'Legacy_Highlands_Specific_Plan', 
+  name = 'Legacy Highlands Phase II Specific Plan', 
   geom = st_sfc(st_polygon(list(L_H_S_P))), 
   crs = 4326
 )
@@ -543,11 +545,11 @@ plannedWarehouses <- rbind(Airport44, AirportGatewaySP, AppleValley,
                            AltitudeBusinessCentre, CADOManifeeProject, ChinoMajesticHeritageSP,
                            DaraIndustrialProject, Durst,
                            HesperiaCommerce, HesperiaCC2SP, Industrial_Redlands,
-                           I15_industrial_park_polygon, LegacyPhaseII,
+                           I15_industrial_park_polygon, Legacy_Highlands_SP,
                            MerrilCommerce, MountainViewIndustrialSP, NinthandVineyard,
                            OntarioRanch, OntarioRanch2, OliveAvenue, OrchardLogistics, 
                            PEPPERAVE, PotreroLogistics, ProjectVientoSP, SierraSummit, SOLC,
-                           SoOntLogisticsCenterP_1, SunsetCrossroads)
+                           SunsetCrossroads)
 
 ##Map
 
