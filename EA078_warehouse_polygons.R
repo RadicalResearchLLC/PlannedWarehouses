@@ -295,32 +295,34 @@ CADOMenifee1 <- rbind(
                   crs = 4326
     )
   
-  # Nile Phillips, I-15 Industrial Park
+# Nile Phillips, I-15 Industrial Park
   
-  I15_industrial_park <- rbind(
-    c(-117.399052, 34.415999),
-    c(-117.399035, 34.419499),
-    c(-117.394950, 34.419354),
-    c(-117.394843, 34.419407),
-    c(-117.390293, 34.419502),
-    c(-117.390282, 34.423642),
-    c(-117.388787, 34.423721),
-    c(-117.387983, 34.423549),
-    c(-117.386279, 34.423456),
-    c(-117.386118, 34.420154),
-    c(-117.389354, 34.415900),
-    c(-117.390174, 34.415927),
-    c(-117.390286, 34.419215),
-    c(-117.394787, 34.419268),
-    c(-117.394884, 34.415953),
-    c(-117.399052, 34.415999)
-  )
-  
-  I15_industrial_park_polygon <- st_sf(
-    name = 'I-15 Industrial Park Area', 
-    geom = st_sfc(st_polygon(list(I15_industrial_park))),
-    crs = 4326
-  )
+I15_industrial_park <- rbind(
+  c(-117.399052, 34.415999),
+  c(-117.399035, 34.419499),
+  c(-117.394950, 34.419354),
+  c(-117.394843, 34.419407),
+  c(-117.390293, 34.419502),
+  c(-117.390282, 34.423642),
+  c(-117.388787, 34.423721),
+  c(-117.387983, 34.423549),
+  c(-117.386279, 34.423456),
+  c(-117.386118, 34.420154),
+  c(-117.389354, 34.415900),
+  c(-117.390174, 34.415927),
+  c(-117.390286, 34.419215),
+  c(-117.394787, 34.419268),
+  c(-117.394884, 34.415953),
+  c(-117.399052, 34.415999)
+)
+
+I15_industrial_park_polygon <- st_sf(
+  name = 'I-15 Industrial Park Area', 
+  geom = st_sfc(st_polygon(list(I15_industrial_park))),
+  crs = 4326
+)
+
+
 
 #Medha Gelli #2022 Legacy Highlands Specific Plan Project
 L_H_S_P <- rbind(
@@ -538,6 +540,26 @@ SoOntLogisticsCenterP_1 <- st_sf(
   crs = 4326
 )
 
+# Nile Phillips, The Landing
+
+landing_coords <- rbind(
+  c(-117.227673, 34.106681),
+  c(-117.227586, 34.104924),
+  c(-117.226203, 34.104893),
+  c(-117.226214, 34.104177),
+  c(-117.220180, 34.104028),
+  c(-117.220217, 34.104307),
+  c(-117.219374, 34.104327),
+  c(-117.219362, 34.106521),
+  c(-117.227673, 34.106681)
+)
+
+landing_polygon <- st_sf(
+  name = 'The Landing', 
+  geom = st_sfc(st_polygon(list(landing_coords))),  # convert the coordinates to a list
+  crs = 4326  # our coordinate reference system
+)
+
 
 ##Update this line of code with the name of your warehouse polygon 
 
@@ -549,7 +571,7 @@ plannedWarehouses <- rbind(Airport44, AirportGatewaySP, AppleValley,
                            MerrilCommerce, MountainViewIndustrialSP, NinthandVineyard,
                            OntarioRanch, OntarioRanch2, OliveAvenue, OrchardLogistics, 
                            PEPPERAVE, PotreroLogistics, ProjectVientoSP, SierraSummit, SOLC,
-                           SunsetCrossroads)
+                           SunsetCrossroads, landing_polygon)
 
 ##Map
 
