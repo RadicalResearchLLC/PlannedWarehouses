@@ -10,6 +10,12 @@ library(sf)
 library(tidyverse)
 library(googlesheets4)
 
+# existing warehouses
+WH.url <- 'https://raw.githubusercontent.com/RadicalResearchLLC/WarehouseMap/main/WarehouseCITY/geoJSON/finalParcels.geojson'
+warehouses <- st_read(WH.url) %>% 
+  st_transform("+proj=longlat +ellps=WGS84 +datum=WGS84") %>% 
+  filter(county %in% c('Riverside', 'San Bernardino'))
+
 #manually entered parcels from 215/60 corridor
 source('PolygonTest.R')
 source('EA078_warehouse_polygons.R')
@@ -123,11 +129,6 @@ planned_tidy_narrow_all <- planned_tidy %>%
   select(name, geom) %>% 
   bind_rows(SBD_wh_narrowest)
 
-# existing warehouses
-WH.url <- 'https://raw.githubusercontent.com/RadicalResearchLLC/WarehouseMap/main/WarehouseCITY/geoJSON/finalParcels.geojson'
-warehouses <- st_read(WH.url) %>% 
-  st_transform("+proj=longlat +ellps=WGS84 +datum=WGS84") %>% 
-  filter(county %in% c('Riverside', 'San Bernardino'))
 
 ## March JPA cumulative Impact list 1
 leaflet() %>% 
@@ -139,7 +140,7 @@ leaflet() %>%
                    options = layersControlOptions(collapsed = FALSE)) %>%
   setView(lng = -117.3, lat = 34, zoom = 9)%>% 
   addPolygons(data = planned_tidy_narrow_all,
-              color = 'purple',
+              color = 'black',
               weight = 1,
               label = ~htmlEscape(name)) %>% 
   addPolygons(data = warehouses,
