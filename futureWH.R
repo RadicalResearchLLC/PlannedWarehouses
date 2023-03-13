@@ -148,6 +148,7 @@ leaflet() %>%
               fillOpacity = 0.2,
               weight = 1)
 
+
 unlink('plannedWarehouses.geojson')
 sf::st_write(planned_tidy_narrow_all, 'plannedWarehouses.geojson')
 
