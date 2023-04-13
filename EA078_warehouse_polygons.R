@@ -589,7 +589,7 @@ RenaissanceRanchComerceCenter <- st_sf(
 ##Update this line of code with the name of your warehouse polygon 
 
 plannedWarehouses <- rbind(Airport44, AirportGatewaySP, AppleValley,
-                           AltitudeBusinessCentre, CADOManifeeProject, ChinoMajesticHeritageSP,
+                           AltitudeBusinessCentre, ChinoMajesticHeritageSP, #CADOMenifee removed for dupe
                            DaraIndustrialProject, Durst,
                            HesperiaCommerce, HesperiaCC2SP, Industrial_Redlands,
                            I15_industrial_park_polygon, landing_polygon, Legacy_Highlands_SP,

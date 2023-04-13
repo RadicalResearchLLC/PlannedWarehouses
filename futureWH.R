@@ -115,6 +115,12 @@ tempPolygon <- EA018sheet %>%
   summarise(geom = st_combine(geometry)) %>%
   st_cast("POLYGON")
   
+# Menifee shapefile 
+menifee <- sf::st_read(dsn = 'Menifee') %>% 
+  st_transform(crs =4326) %>% 
+  select(ProjectTit, geometry) %>% 
+  rename(name = ProjectTit, geom = geometry)
+
 
 ## SBD list to date
 SBD_wh_narrowest <- Fontana_industrial %>% 
@@ -123,11 +129,13 @@ SBD_wh_narrowest <- Fontana_industrial %>%
   bind_rows(bloom_proj) %>% 
   bind_rows(Speedway) %>% 
   bind_rows(plannedWarehouses) %>% 
-  bind_rows(tempPolygon)
+  bind_rows(tempPolygon) %>% 
+  bind_rows(menifee)
 
 planned_tidy_narrow_all <- planned_tidy %>% 
   select(name, geom) %>% 
-  bind_rows(SBD_wh_narrowest)
+  bind_rows(SBD_wh_narrowest) %>% 
+  st_as_sf()
 
 
 ## March JPA cumulative Impact list 1
@@ -151,4 +159,5 @@ leaflet() %>%
 
 unlink('plannedWarehouses.geojson')
 sf::st_write(planned_tidy_narrow_all, 'plannedWarehouses.geojson')
+
 
