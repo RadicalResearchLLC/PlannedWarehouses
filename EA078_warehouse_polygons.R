@@ -440,7 +440,7 @@ AppleValley1 <- rbind(
 )
 
 AppleValley <- st_sf(
-  name = 'AppleValley', 
+  name = 'Apple Valley 143', 
   geom = st_sfc(st_polygon(list(AppleValley1))), 
   crs = 4326)
 
@@ -591,7 +591,8 @@ RenaissanceRanchComerceCenter <- st_sf(
 plannedWarehouses <- rbind(Airport44, AirportGatewaySP, AppleValley,
                            AltitudeBusinessCentre, ChinoMajesticHeritageSP, #CADOMenifee removed for dupe
                            DaraIndustrialProject, Durst,
-                           HesperiaCommerce, HesperiaCC2SP, Industrial_Redlands,
+                           HesperiaCommerce, #HesperiaCC2SP, 
+                           Industrial_Redlands,
                            I15_industrial_park_polygon, landing_polygon, Legacy_Highlands_SP,
                            MerrilCommerce, MountainViewIndustrialSP, NinthandVineyard,
                            OntarioRanch, OntarioRanch2, OliveAvenue, OrchardLogistics, 

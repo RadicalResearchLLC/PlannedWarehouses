@@ -114,7 +114,7 @@ tempPolygon <- EA018sheet %>%
   group_by(name) %>%
   summarise(geom = st_combine(geometry)) %>%
   st_cast("POLYGON")
-  
+
 # Menifee shapefile 
 menifee <- sf::st_read(dsn = 'Menifee') %>% 
   st_transform(crs =4326) %>% 
@@ -156,6 +156,10 @@ leaflet() %>%
               fillOpacity = 0.2,
               weight = 1)
 
+
+leaflet() %>% 
+  addTiles() %>% 
+  addPolygons(data = tempPolygon)
 
 unlink('plannedWarehouses.geojson')
 sf::st_write(planned_tidy_narrow_all, 'plannedWarehouses.geojson')
