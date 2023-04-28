@@ -628,7 +628,7 @@ MW_B4 <- rbind(c(-117.2916, 33.91375),
                c(-117.2916, 33.91375))
 MWB4 <- st_sf(name = 'Meridian West Bldg 4', geom = st_sfc(st_polygon(list(MW_B4))), crs = 4326)
 
-planned215_60 <- rbind(SPerris1, WLC, StoneridgeCC, MValTC, RiderPat, KnoxBPd, KnoxBPe, RamonaGate,
+planned215_60 <- rbind(SPerris1, WLC, StoneridgeCC, RiderPat, KnoxBPd, KnoxBPe, RamonaGate,
                        HeacockCC, OLC3, DukeWH, OleanderBP, MapesCC, March1LP, SeatonPerry,
                        HarvillBC,SeatonCajalcoIP, PerrisCC, HarvillRider, RedlandsAveWestIP, PerrisMorganIPP,
                        PlacentiaLP, RedlandsAveEastIP, MuranakaWP, RamonaIndianWP, MeridianD1Gateway,

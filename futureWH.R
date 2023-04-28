@@ -137,7 +137,6 @@ planned_tidy_narrow_all <- planned_tidy %>%
   bind_rows(SBD_wh_narrowest) %>% 
   st_as_sf()
 
-
 ## March JPA cumulative Impact list 1
 leaflet() %>% 
   addTiles() %>% 
