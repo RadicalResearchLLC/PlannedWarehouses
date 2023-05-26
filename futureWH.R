@@ -93,7 +93,7 @@ EA018sheet <- read_sheet('https://docs.google.com/spreadsheets/d/1Ev8455_HqftMlc
                                 sheet = 'Warehouse Coordinates EA 108') %>% 
   select(1:3) %>% 
   janitor::clean_names() %>% 
-  rename(name = name_1, lng = longitude_2, lat = latitude_3) %>% 
+  rename(lng = longitude, lat = latitude) %>% 
   filter(!is.na(lng))
 
 EA018_whNames <- EA018sheet %>%
