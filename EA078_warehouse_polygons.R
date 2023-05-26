@@ -620,6 +620,6 @@ rm(ls = MerrilCommerce, MerrilCommerce1, MountainViewIndustrial, MountainViewInd
 rm(ls = OntarioRanch, OntarioRanch1, OntarioRanch2, OntarioRanchSub, OrchardLogistics)
 rm(ls = NinthandVineyard, OrchardLogistics1, PEPPERAVE, PotreroLogistics, PotreroLogistics1)
 rm(ls = ProjectViento, ProjectVientoSP, SierraSummit, SierraSummit1, SOLC, SOLC1, SoOntLogisticsCenterP_1)
-rm(ls = SunsetCrossroads, SunsetCrossroads1)
+rm(ls = SunsetCrossroads, SunsetCrossroads1, landing_coords, landing_polygon, RenaissanceRanchComerceCenter, RenaissanceRanchCCSP)
 
 

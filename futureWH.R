@@ -21,30 +21,21 @@ source('PolygonTest.R')
 source('EA078_warehouse_polygons.R')
 
 #worksheet with details of projects
-March215_60_sheet <- read_sheet('https://docs.google.com/spreadsheets/d/1u7JJYoxl5lE-oXJHEt5kqICmLug6SDh5sYSrSNud7Cs/edit#gid=0',
-                       sheet = 'March215_60') %>% 
-  janitor::clean_names()
+# do I need this?
+#March215_60_sheet <- read_sheet('https://docs.google.com/spreadsheets/d/1u7JJYoxl5lE-oXJHEt5kqICmLug6SDh5sYSrSNud7Cs/edit#gid=0',
+#                       sheet = 'March215_60') %>% 
+#  janitor::clean_names()
 
 #a couple of older approved warehouses in Moreno Valley from public records request
 missingMoVal <- sf::st_read('C:/Dev/MJPA2/jurisdictions/moValmissing.geojson') %>% 
   select(Name, geometry) %>% 
   rename(geom = geometry, name = Name)
 
-planned215_60_full <- planned215_60 %>% 
-  bind_rows(missingMoVal) %>% 
-  full_join(March215_60_sheet, by = c('name' = 'building_id')) %>% 
-  rename(buildingID = 'name', project_size_sq_ft = size_sq_ft) %>% 
-  select(-x14, -jurisdiction_enviro_docs)
-
-shapeArea <- st_area(planned215_60_full)
-
-planned_tidy <- planned215_60_full %>% 
-  mutate(type = 'Planned',
-         area =  round(as.numeric(10.764*shapeArea), -3)) %>% 
-  mutate(floorSpace.sq.ft = 0.5*area) %>% 
-  select(buildingID, type, floorSpace.sq.ft, area, jurisdiction, geom) %>% 
-  rename(name = buildingID) %>% 
-  mutate(year_built = '2025')
+#planned215_60_full <- planned215_60 %>% 
+#  bind_rows(missingMoVal) %>% 
+#  full_join(March215_60_sheet, by = c('name' = 'building_id')) %>% 
+#  rename(buildingID = 'name', project_size_sq_ft = size_sq_ft) %>% 
+#  select(-x14, -jurisdiction_enviro_docs)
 
 ##San Bernardino County planned warehouse data to date
 
@@ -121,23 +112,23 @@ menifee <- sf::st_read(dsn = 'Menifee') %>%
   select(ProjectTit, geometry) %>% 
   rename(name = ProjectTit, geom = geometry)
 
+## remove extraneous
+rm(ls = EA018_whNames, EA018sheet, Fontana_industrial2, u)
 
-## SBD list to date
-SBD_wh_narrowest <- Fontana_industrial %>% 
+## Known warehouse list to date
+planned_tidy <- Fontana_industrial %>% 
   select(name, geometry) %>% 
   rename(geom = geometry) %>% 
   bind_rows(bloom_proj) %>% 
   bind_rows(Speedway) %>% 
   bind_rows(plannedWarehouses) %>% 
   bind_rows(tempPolygon) %>% 
-  bind_rows(menifee)
+  bind_rows(menifee) |> 
+  bind_rows(planned215_60) |> 
+  bind_rows(missingMoVal)
 
-planned_tidy_narrow_all <- planned_tidy %>% 
-  select(name, geom) %>% 
-  bind_rows(SBD_wh_narrowest) %>% 
-  st_as_sf()
 
-## March JPA cumulative Impact list 1
+## Planned warehouses cumulative Impact list 1
 leaflet() %>% 
   addTiles() %>% 
   addProviderTiles(providers$CartoDB.PositronNoLabels, group = 'Basemap') %>% 
@@ -146,7 +137,7 @@ leaflet() %>%
   addLayersControl(baseGroups = c('Basemap', 'Imagery'),
                    options = layersControlOptions(collapsed = FALSE)) %>%
   setView(lng = -117.3, lat = 34, zoom = 9)%>% 
-  addPolygons(data = planned_tidy_narrow_all,
+  addPolygons(data = planned_tidy,
               color = 'black',
               weight = 1,
               label = ~htmlEscape(name)) %>% 
@@ -155,12 +146,7 @@ leaflet() %>%
               fillOpacity = 0.2,
               weight = 1)
 
-
-leaflet() %>% 
-  addTiles() %>% 
-  addPolygons(data = tempPolygon)
-
 unlink('plannedWarehouses.geojson')
-sf::st_write(planned_tidy_narrow_all, 'plannedWarehouses.geojson')
+sf::st_write(planned_tidy, 'plannedWarehouses.geojson')
 
 
