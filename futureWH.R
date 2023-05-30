@@ -13,8 +13,8 @@ library(googlesheets4)
 # existing warehouses
 WH.url <- 'https://raw.githubusercontent.com/RadicalResearchLLC/WarehouseMap/main/WarehouseCITY/geoJSON/finalParcels.geojson'
 warehouses <- st_read(WH.url) %>% 
-  st_transform("+proj=longlat +ellps=WGS84 +datum=WGS84") %>% 
-  filter(county %in% c('Riverside', 'San Bernardino'))
+  st_transform("+proj=longlat +ellps=WGS84 +datum=WGS84") #%>% 
+ # filter(county %in% c('Riverside', 'San Bernardino'))
 
 #manually entered parcels from 215/60 corridor
 source('PolygonTest.R')
@@ -40,14 +40,14 @@ missingMoVal <- sf::st_read('C:/Dev/MJPA2/jurisdictions/moValmissing.geojson') %
 ##San Bernardino County planned warehouse data to date
 
 ## Fontana and near Fontana data
-## MCN_projects acquired from City of Fontana Open Data page January 2023
+## MCN_projects acquired from City of Fontana Open Data page  May 2023
 ## https://data-fontanaca.opendata.arcgis.com/datasets/mcn-projects-public/explore?location=34.108794%2C-117.462315%2C12.92
 
 notWHParcels <- c('zoning code amendment schools in fbc and truck rep',
                   'east coast truck and auto sales',
                   'up zoning for the i-15 logistics warehouse')
 
-Fontana3yrPlanned <- sf::st_read(dsn = 'C:/Dev/Fontana_analysis/MCN_Projects_Public.geojson') %>% 
+Fontana3yrPlanned <- sf::st_read(dsn = 'MCN_Projects_Public.geojson') %>% 
   rename(name = Fontana_COF_DSO_PRJS_PROJ_NAME,
          number = Fontana_COF_DSO_PRJS_PROJECT_NO,
          status = Fontana_COF_DSO_PRJS_ProjectSta,
@@ -58,11 +58,12 @@ Fontana3yrPlanned <- sf::st_read(dsn = 'C:/Dev/Fontana_analysis/MCN_Projects_Pub
          log = str_detect(name, 'logistics'),
          com = str_detect(name, 'commerce'),
          truck = str_detect(name, 'truck'),
-         bus = str_detect(name, 'business center')) %>% 
+         bus = str_detect(name, 'business center'),
+         cc = str_detect(name, 'corporate center')) %>% 
   filter(name %ni% notWHParcels)
 
 Fontana_industrial <- Fontana3yrPlanned %>% 
-  filter(wh == TRUE | ind == TRUE | log == TRUE | com == TRUE | truck == TRUE | bus == TRUE) %>% 
+  filter(wh == TRUE | ind == TRUE | log == TRUE | com == TRUE | truck == TRUE | bus == TRUE | cc == TRUE) %>% 
   filter(OBJECTID %ni% c(4, 79, 81, 84, 88, 131, 136, 222, 223, 351, 500, 501, 502, 503, 657, 659, 660, 966, 969 )) %>% 
   select(name, number, apn, status, Shape__Area, geometry) %>% 
   rename(footprint = Shape__Area)
@@ -86,7 +87,13 @@ speed <- rbind(c(-117.51347, 34.08497),
                c(-117.51347, 34.08497))
 Speedway <- st_sf(name = 'Speedway Commerce Center', geom = st_sfc(st_polygon(list(speed))), crs = 4326)
 
-rm(ls = speed, Fontana3yrPlanned, missingMoVal)
+rm(ls = speed, Fontana3yrPlanned)
+
+# Menifee shapefile 
+menifee <- sf::st_read(dsn = 'Menifee') %>% 
+  st_transform(crs =4326) %>% 
+  select(ProjectTit, geometry) %>% 
+  rename(name = ProjectTit, geom = geometry)
 
 #Import EA018 warehouse list  
 EA018sheet <- read_sheet('https://docs.google.com/spreadsheets/d/1Ev8455_HqftMlcxs9o7hbe3eip9SgOMomG5KHI9XlBs/edit#gid=720173336',
@@ -105,12 +112,6 @@ tempPolygon <- EA018sheet %>%
   group_by(name) %>%
   summarise(geom = st_combine(geometry)) %>%
   st_cast("POLYGON")
-
-# Menifee shapefile 
-menifee <- sf::st_read(dsn = 'Menifee') %>% 
-  st_transform(crs =4326) %>% 
-  select(ProjectTit, geometry) %>% 
-  rename(name = ProjectTit, geom = geometry)
 
 ## remove extraneous
 rm(ls = EA018_whNames, EA018sheet, Fontana_industrial2, u)
