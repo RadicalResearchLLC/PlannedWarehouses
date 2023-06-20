@@ -62,8 +62,8 @@ Fontana3yrPlanned <- sf::st_read(dsn = 'MCN_Projects_Public.geojson') %>%
          cc = str_detect(name, 'corporate center')) %>% 
   filter(name %ni% notWHParcels)
 
-Fontana_industrial <- Fontana3yrPlanned %>% 
-  filter(wh == TRUE | ind == TRUE | log == TRUE | com == TRUE | truck == TRUE | bus == TRUE | cc == TRUE) %>% 
+Fontana_industrial <- Fontana3yrPlanned |>  
+  filter(wh == TRUE | ind == TRUE | log == TRUE | com == TRUE | truck == TRUE | bus == TRUE | cc == TRUE) |>  
   filter(OBJECTID %ni% c(4, 79, 81, 84, 88, 131, 136, 222, 223, 351, 500, 501, 502, 503, 657, 659, 660, 966, 969 )) %>% 
   select(name, number, apn, status, Shape__Area, geometry) %>% 
   rename(footprint = Shape__Area)
@@ -75,7 +75,11 @@ Fontana_industrial2 <- Fontana_industrial %>%
 #remove duplicates
 u <- st_equals(Fontana_industrial2, retain_unique = TRUE)
 Fontana_industrial <- Fontana_industrial2[-unlist(u),] %>% 
-  select(-row)
+  select(-row) |> 
+  group_by(name) |> 
+  summarize(.groups = 'drop')
+
+  
 
 speed <- rbind(c(-117.51347, 34.08497),
                c(-117.51289, 34.08684),
@@ -141,7 +145,8 @@ leaflet() %>%
   addPolygons(data = planned_tidy,
               color = 'black',
               weight = 1,
-              label = ~htmlEscape(name)) %>% 
+              label = ~htmlEscape(name),
+              fillOpacity = 0.4) %>% 
   addPolygons(data = warehouses,
               color= 'red',
               fillOpacity = 0.2,
