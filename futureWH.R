@@ -72,14 +72,12 @@ Fontana_industrial <- Fontana3yrPlanned |>
 Fontana_industrial2 <- Fontana_industrial %>% 
   select(name, number, geometry, status, footprint, apn) %>%
   mutate(row = row_number())
-#remove duplicates
+#remove duplicates and merge named projects
 u <- st_equals(Fontana_industrial2, retain_unique = TRUE)
 Fontana_industrial <- Fontana_industrial2[-unlist(u),] %>% 
   select(-row) |> 
   group_by(name) |> 
   summarize(.groups = 'drop')
-
-  
 
 speed <- rbind(c(-117.51347, 34.08497),
                c(-117.51289, 34.08684),
