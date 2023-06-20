@@ -416,12 +416,12 @@ March1LP1 <- rbind(c(-117.26212, 33.87015),
                    c(-117.25519, 33.87007),
                    c(-117.26212, 33.87015))
 March1LP <- st_sf(name = 'First March Logistics Project', geom = st_sfc(st_polygon(list(March1LP1))), crs = crs)
-HarvillBC1 <- rbind(c(-117.2482, 33.81935),
-                    c(-117.24623, 33.81935),
-                    c(-117.24623, 33.81599),
-                    c(-117.2482, 33.81599),
-                    c(-117.2482, 33.81935))
-HarvillBC <-  st_sf(name = 'Harvill Business Center', geom = st_sfc(st_polygon(list(HarvillBC1))), crs = crs)
+#HarvillBC1 <- rbind(c(-117.2482, 33.81935),
+#                    c(-117.24623, 33.81935),
+#                    c(-117.24623, 33.81599),
+#                    c(-117.2482, 33.81599),
+#                    c(-117.2482, 33.81935))
+#HarvillBC <-  st_sf(name = 'Harvill Business Center', geom = st_sfc(st_polygon(list(HarvillBC1))), crs = crs)
 SeatonCajalco1 <- rbind(c(-117.2615, 33.83725),
                         c(-117.25942, 33.8373),
                         c(-117.25947, 33.83412),
@@ -630,7 +630,7 @@ MWB4 <- st_sf(name = 'Meridian West Bldg 4', geom = st_sfc(st_polygon(list(MW_B4
 
 planned215_60 <- rbind(SPerris1, WLC, StoneridgeCC, RiderPat, KnoxBPd, KnoxBPe, RamonaGate,
                        HeacockCC, OLC3, DukeWH, OleanderBP, MapesCC, March1LP, SeatonPerry,
-                       HarvillBC,SeatonCajalcoIP, PerrisCC, HarvillRider, RedlandsAveWestIP, PerrisMorganIPP,
+                       SeatonCajalcoIP, PerrisCC, HarvillRider, RedlandsAveWestIP, PerrisMorganIPP,
                        PlacentiaLP, RedlandsAveEastIP, MuranakaWP, RamonaIndianWP, MeridianD1Gateway,
                        ramonaBrennanWP, MoValBC, FirstHarleyKI, OperonHKI, HarleyKnoxIP,
                        EdgemontCC, EdgemontCC_2, Chartwell, Old215BP, MarlboroughNGLI, Phelan,

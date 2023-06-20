@@ -3,7 +3,7 @@
 ##First created as part of MJPA mapping process in October 2022
 ##Last modified February 2023
 
-rm(list =ls())
+#rm(list =ls())
 '%ni%' <- Negate('%in%') ## not in operator
 
 library(sf)
