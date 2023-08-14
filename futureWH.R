@@ -119,7 +119,7 @@ tempPolygon <- EA018sheet %>%
 rm(ls = EA018_whNames, EA018sheet, Fontana_industrial2, u)
 
 ## Known warehouse list to date
-planned_tidy <- Fontana_industrial %>% 
+planned_tidy2 <- Fontana_industrial %>% 
   select(name, geometry) %>% 
   rename(geom = geometry) %>% 
   bind_rows(bloom_proj) %>% 
@@ -130,6 +130,27 @@ planned_tidy <- Fontana_industrial %>%
   bind_rows(planned215_60) |> 
   bind_rows(missingMoVal)
 
+built_rejected_WH_list <- c('airef beech ave logistics center',
+                            'almond truck and trailer',
+                            'beech and santa ana warehouse',
+                            'citrus & slover warehouse',
+                            'clover industrial property',
+                            'fontana foothills commerce center',
+                            'goodman industrial park iii',
+                            'Knox Business Park Bldg. E',
+                            'Multi_Tenant_Industrial_Warehouse_Redlands',
+                            'Mountain View Industrial',
+                            'santa ana ave industrial development',
+                            'Seaton and Perry Industrial Project',
+                            'Seaton Tech Center',
+                            'sierra and casa grande industrial project',
+                            'SierraSummit',
+                            'South Campus Reg3',
+                            'South Campus Bldg 2',
+                            'South Campus Bldg 1',
+                            'target warehouse generator')
+
+planned_tidy <- filter(planned_tidy2, name %ni% built_rejected_WH_list)
 
 ## Planned warehouses cumulative Impact list 1
 leaflet() %>% 
