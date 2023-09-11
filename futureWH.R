@@ -155,7 +155,7 @@ planned_tidy <- filter(planned_tidy2, name %ni% built_rejected_WH_list)
 ## Planned warehouses cumulative Impact list 1
 leaflet() %>% 
   addTiles() %>% 
-  addProviderTiles(providers$CartoDB.PositronNoLabels, group = 'Basemap') %>% 
+  addProviderTiles(providers$CartoDB.Positron, group = 'Basemap') %>% 
   addProviderTiles(provider = providers$Esri.WorldImagery, 
                    group = 'Imagery') %>% 
   addLayersControl(baseGroups = c('Basemap', 'Imagery'),
@@ -174,4 +174,9 @@ leaflet() %>%
 unlink('plannedWarehouses.geojson')
 sf::st_write(planned_tidy, 'plannedWarehouses.geojson')
 
+mojave <- planned_tidy |> 
+  filter(name == 'Mojave 68')
 
+leaflet() |> 
+  addTiles() |> 
+  addPolygons(data = mojave)
