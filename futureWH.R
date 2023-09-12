@@ -130,14 +130,19 @@ planned_tidy2 <- Fontana_industrial %>%
   bind_rows(planned215_60) |> 
   bind_rows(missingMoVal)
 
-built_rejected_WH_list <- c('airef beech ave logistics center',
+built_WH_list <- c('airef beech ave logistics center',
                             'almond truck and trailer',
                             'beech and santa ana warehouse',
+                            'boyle west warehouse',
                             'citrus & slover warehouse',
                             'clover industrial property',
                             'fontana foothills commerce center',
                             'goodman industrial park iii',
+                            'Homestead Industrial Project',
+                            'Interchange Logistics Center 2',
+                            'Knox Business Park Bldg. D',
                             'Knox Business Park Bldg. E',
+                            'Mango Avenue Industrial',
                             'Multi_Tenant_Industrial_Warehouse_Redlands',
                             'Mountain View Industrial',
                             'santa ana ave industrial development',
@@ -148,9 +153,11 @@ built_rejected_WH_list <- c('airef beech ave logistics center',
                             'South Campus Reg3',
                             'South Campus Bldg 2',
                             'South Campus Bldg 1',
-                            'target warehouse generator')
+                            'target warehouse generator',
+                            'Whittram Avenue Warehouse')
 
-planned_tidy <- filter(planned_tidy2, name %ni% built_rejected_WH_list)
+
+planned_tidy <- filter(planned_tidy2, name %ni% built_WH_list)
 
 ## Planned warehouses cumulative Impact list 1
 leaflet() %>% 
@@ -174,9 +181,4 @@ leaflet() %>%
 unlink('plannedWarehouses.geojson')
 sf::st_write(planned_tidy, 'plannedWarehouses.geojson')
 
-mojave <- planned_tidy |> 
-  filter(name == 'Mojave 68')
 
-leaflet() |> 
-  addTiles() |> 
-  addPolygons(data = mojave)
