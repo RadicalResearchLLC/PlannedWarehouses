@@ -1,7 +1,7 @@
 ##Generate geospatial datafile of planned warehouses
 ##Created by Mike McCarthy and possibly EA 078
 ##First created as part of MJPA mapping process in October 2022
-##Last modified February 2023
+##Last modified December 2023
 
 #rm(list =ls())
 '%ni%' <- Negate('%in%') ## not in operator
@@ -10,10 +10,7 @@ library(sf)
 library(tidyverse)
 library(googlesheets4)
 
-# existing warehouses
-WH.url <- 'https://raw.githubusercontent.com/RadicalResearchLLC/WarehouseMap/main/WarehouseCITY/geoJSON/finalParcels.geojson'
-warehouses <- st_read(WH.url) %>% 
-  st_transform("+proj=longlat +ellps=WGS84 +datum=WGS84") #%>% 
+
  # filter(county %in% c('Riverside', 'San Bernardino'))
 
 #manually entered parcels from 215/60 corridor
@@ -145,7 +142,7 @@ built_WH_list <- c('airef beech ave logistics center',
                             'Mango Avenue Industrial',
                             'Multi_Tenant_Industrial_Warehouse_Redlands',
                             'Mountain View Industrial',
-                            'santa ana ave industrial development',
+                            #'santa ana ave industrial development',
                             'Seaton and Perry Industrial Project',
                             'Seaton Tech Center',
                             'sierra and casa grande industrial project',
@@ -154,10 +151,20 @@ built_WH_list <- c('airef beech ave logistics center',
                             'South Campus Bldg 2',
                             'South Campus Bldg 1',
                             'target warehouse generator',
-                            'Whittram Avenue Warehouse')
+                            'Whittram Avenue Warehouse',
+                            'Menifee Commerce Center II')
+
+rejected_list <- c('Airport Gateway Specific Plan Area')
 
 
-planned_tidy <- filter(planned_tidy2, name %ni% built_WH_list)
+planned_tidy <- planned_tidy2 |> 
+  filter(name %ni% built_WH_list) |> 
+  filter(name %ni% rejected_list)
+
+# existing warehouses
+WH.url <- 'https://raw.githubusercontent.com/RadicalResearchLLC/WarehouseMap/main/WarehouseCITY/geoJSON/finalParcels.geojson'
+warehouses <- st_read(WH.url) %>% 
+  st_transform("+proj=longlat +ellps=WGS84 +datum=WGS84") #%>% 
 
 ## Planned warehouses cumulative Impact list 1
 leaflet() %>% 
