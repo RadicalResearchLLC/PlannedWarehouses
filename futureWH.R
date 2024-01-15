@@ -181,7 +181,8 @@ leaflet() %>%
               label = ~htmlEscape(name),
               fillOpacity = 0.4) %>% 
   addPolygons(data = warehouses,
-              color= 'red',
+              fillColor= 'grey80',
+              color = 'orange',
               fillOpacity = 0.2,
               weight = 1)
 
