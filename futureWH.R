@@ -175,18 +175,19 @@ leaflet() %>%
   addLayersControl(baseGroups = c('Basemap', 'Imagery'),
                    options = layersControlOptions(collapsed = FALSE)) %>%
   setView(lng = -117.3, lat = 34, zoom = 9)%>% 
+  addPolygons(data = warehouses,
+              fillColor= 'black',
+              color = 'red',
+              fillOpacity = 0.2,
+              weight = 1) |> 
   addPolygons(data = planned_tidy,
               color = 'black',
               weight = 1,
               label = ~htmlEscape(name),
-              fillOpacity = 0.4) %>% 
-  addPolygons(data = warehouses,
-              fillColor= 'grey80',
-              color = 'orange',
-              fillOpacity = 0.2,
-              weight = 1)
+              fillOpacity = 0.3) 
 
 unlink('plannedWarehouses.geojson')
 sf::st_write(planned_tidy, 'plannedWarehouses.geojson')
+
 
 
