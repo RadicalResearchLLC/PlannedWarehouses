@@ -222,7 +222,7 @@ OntarioRanch1 <- rbind(
 )
 
 OntarioRanch <- st_sf(
-  name = 'OntarioRanch', 
+  name = 'Ontario Ranch 3', 
   geom = st_sfc(st_polygon(list(OntarioRanch1))), 
   crs = 4326)
 
@@ -489,7 +489,7 @@ OntarioRanch2 <- rbind(
   c(-117.650557, 33.98308)
 )
 OntarioRanch2 <- st_sf(
-  name = 'Ontario Ranch', 
+  name = 'Ontario Ranch 1', 
   geom = st_sfc(st_polygon(list(OntarioRanch2))), 
   crs = 4326
 )
