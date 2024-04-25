@@ -271,7 +271,9 @@ sf_use_s2(FALSE)
 planned_with_CEQA <- planned_tidy |> 
   mutate(name = str_to_lower(name)) |> 
   inner_join(MasterSCH) |> 
-  select(geom, project, ceqa_url, sch_number, stage_pending_approved)
+  select(geom, project, ceqa_url, sch_number, stage_pending_approved) |> 
+  mutate(category = ifelse(stage_pending_approved == 'Approved',
+                           'Approved', 'CEQA Review'))
 
 planned_mismatch <- planned_tidy |> 
   mutate(name = str_to_lower(name)) |> 
@@ -322,9 +324,11 @@ planned_with_CEQA$parcel_area <- areaM2*10.7639
 sum_stats <- planned_with_CEQA |> 
   st_set_geometry(value = NULL) |> 
   group_by(stage_pending_approved) |> 
-  summarize(sumBldg = round(sum(size_sqft, na.rm = T), -3),
+  summarize(sumBldg = round(sum(parcel_area*0.55, na.rm = T), -3),
             sumFootprint = round(sum(parcel_area, na.rm = T), -4),
             countProjects = n()) 
 
+unlink('CEQA_WH.geojson')
 sf::st_write(planned_with_CEQA, 'CEQA_WH.geojson')
 
+setwd(wd)
