@@ -183,9 +183,11 @@ built_WH_list <- c('airef beech ave logistics center',
                             'South Campus Bldg 1',
                             'target warehouse generator',
                             'Whittram Avenue Warehouse',
-                            'Menifee Commerce Center II')
+                            'Menifee Commerce Center II',
+                            'Airport_Lot_44_Victorville')
 
-rejected_list <- c('Airport Gateway Specific Plan Area', 'Compass Danbe Centerpointe')
+rejected_list <- c('Airport Gateway Specific Plan Area', 'Compass Danbe Centerpointe',
+                   'Enterprise Way Industrial Building')
 
 multiBldg_complexes <- c('barton rd logistics center',
                          'edgemont commerce center',
@@ -247,12 +249,13 @@ leaflet() %>%
                    options = layersControlOptions(collapsed = FALSE)) %>%
   setView(lng = -117.3, lat = 34, zoom = 9)%>% 
   addPolygons(data = warehouses,
-              fillColor= 'black',
+              fillColor= 'red',
               color = 'red',
               fillOpacity = 0.2,
-              weight = 1) |> 
+              weight = 1,
+              label = ~paste0(apn, year_built)) |> 
   addPolygons(data = planned_tidy,
-              color = 'black',
+              color = 'blue',
               weight = 1,
               label = ~htmlEscape(name),
               fillOpacity = 0.3) 
@@ -303,13 +306,8 @@ leaflet() %>%
               color = ~planned_color_palette(stage_pending_approved) ,
               fillOpacity = 0.2,
               weight = 1,
-              label = ~htmlEscape(paste(name, stage_pending_approved))
-              )|> 
-  addPolygons(data = planned_unmatched,
-              color = 'blue',
-              weight = 1,
-              label = ~htmlEscape(name),
-              fillOpacity = 0.3) 
+              label = ~htmlEscape(paste(project, stage_pending_approved))
+              )
 
 ##only works with original FONTANA INDUSTRIAL
 mismatched_w_description <- Fontana_industrial |> 
